@@ -11,22 +11,48 @@ class TestTabsSwitching:
     def test_go_to_sauces(self, driver):
         driver.get(UrlList.page_main_url)
         WebDriverWait(driver, 5).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, Locators.sauces_span)))
-        driver.find_element(By.XPATH, Locators.sauces_span).click()
-        assert driver.find_element(By.XPATH, Locators.select_tab_constructor).text == 'Соусы'
+            expected_conditions.visibility_of_element_located(Locators.sauces_span))
+        driver.find_element(*Locators.sauces_span).click()
+        
+        # Ждем, пока активный таб изменится на "Соусы"
+        WebDriverWait(driver, 5).until(
+            expected_conditions.text_to_be_present_in_element(Locators.select_tab_constructor, 'Соусы'))
+        
+        assert driver.find_element(*Locators.select_tab_constructor).text == 'Соусы'
 
     # Переход во вкладку "Начинки"
     def test_go_to_filling(self, driver):
         driver.get(UrlList.page_main_url)
         WebDriverWait(driver, 5).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, Locators.filling_span)))
-        driver.find_element(By.XPATH, Locators.filling_span).click()
-        assert driver.find_element(By.XPATH, Locators.select_tab_constructor).text == 'Начинки'
+            expected_conditions.visibility_of_element_located(Locators.filling_span))
+        driver.find_element(*Locators.filling_span).click()
+        
+        # Ждем, пока активный таб изменится на "Начинки"
+        WebDriverWait(driver, 5).until(
+            expected_conditions.text_to_be_present_in_element(Locators.select_tab_constructor, 'Начинки'))
+        
+        assert driver.find_element(*Locators.select_tab_constructor).text == 'Начинки'
 
-    # Переход во вкладку "Булки" через "Начинки", так как раздел «Булки» при заходе на сайт выбраны по дефолту
+    # Переход во вкладку "Булки" через "Начинки"
     def test_go_to_buns(self, driver):
         driver.get(UrlList.page_main_url)
+        
+        # Сначала переходим во вкладку "Начинки", чтобы потом вернуться к "Булкам"
         WebDriverWait(driver, 5).until(
-            expected_conditions.visibility_of_element_located((By.XPATH, Locators.buns_span)))
-        driver.find_element(By.XPATH, Locators.buns_span)
-        assert driver.find_element(By.XPATH, Locators.select_tab_constructor).text == 'Булки'
+            expected_conditions.visibility_of_element_located(Locators.filling_span))
+        driver.find_element(*Locators.filling_span).click()
+        
+        # Ждем, пока активный таб изменится на "Начинки"
+        WebDriverWait(driver, 5).until(
+            expected_conditions.text_to_be_present_in_element(Locators.select_tab_constructor, 'Начинки'))
+        
+        # Теперь переходим во вкладку "Булки"
+        WebDriverWait(driver, 5).until(
+            expected_conditions.visibility_of_element_located(Locators.buns_span))
+        driver.find_element(*Locators.buns_span).click()
+        
+        # Ждем, пока активный таб изменится на "Булки"
+        WebDriverWait(driver, 5).until(
+            expected_conditions.text_to_be_present_in_element(Locators.select_tab_constructor, 'Булки'))
+        
+        assert driver.find_element(*Locators.select_tab_constructor).text == 'Булки'
