@@ -24,4 +24,5 @@ class TestLogout:
         WebDriverWait(driver, 5).until(
             expected_conditions.visibility_of_element_located(Locators.login_button_login_page))
 
-        assert driver.find_element(*Locators.login_button_login_page)
+        login_button = driver.find_element(*Locators.login_button_login_page)
+        assert login_button.is_displayed(), "Кнопка 'Войти' не отображается на странице после выхода"
