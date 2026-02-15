@@ -12,8 +12,7 @@ class Locators:
     recovery_pass_link = By.XPATH, './/a[text()="Восстановить пароль"]'  # Ссылка "Восстановить пароль"
     recovery_pass_button = By.XPATH, './/button[text()="Восстановить"]'  # Кнопка "Восстановить пароль"
     profile_link = By.XPATH, './/a[text()="Профиль"]'  # Ссылка "Профиль" в личном кабинете
-    incorrect_password_message = By.XPATH, './/p[text()="Некорректный пароль"]'  # Cообщение "Некорректный пароль"
-    incorrect_password_check = By.XPATH, './/p[text()="Некорректный пароль"]'  # Проверка сообщения
+    incorrect_password_message = By.XPATH, './/p[text()="Некорректный пароль"]'  # Cообщение "Некорректный пароль"(можно использовать для проверок)
     input_name_field = By.XPATH, ".//label[text()='Имя']/following-sibling::input"  # Поле ввода имени пользователя
     input_email_field = By.XPATH, ".//label[text()='Email']/following-sibling::input"  # Поле ввода email пользователя
     input_password_field = By.XPATH, ".//label[text()='Пароль']/following-sibling::input"  # Поле ввода пароля пользователя
